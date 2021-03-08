@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Add invoice to transport</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/mirceaStyles.css}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+
+<form action="/addInvoice/{id}" method="post" th:object="${invoice}">
+    <!--    <input type="hidden" id="cui" th:field="*{cui}">-->
+    <select th:field="*{invoiceSerial}">
+<!--        <option th:value="company:${companies}" th:value="${company.internalInvoiceId}"-->
+<!--                th:text="${company.internalInvoiceSerial}"></option>-->
+        <option th:value="company:${companies}" th:value="${company.internalInvoiceSerial}"></option>
+        <option th:value="company:${companies}" th:value="${company.externalInvoiceSerial}"></option>
+    </select>
+    <input th:field="*{invoiceSerial}" type="text" placeholder="Invoice" name="cui">
+
+
+    <button type="submit" th:text="#{company.header.label}"></button>&nbsp;<button type="reset">Reset</button>&nbsp;
+    <a href="/companies">Cancel</a><br><br>
+    <hr>
+    <br><br>
+</form>
+
+</body>
+</html>

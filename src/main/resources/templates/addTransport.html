@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Add transports</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/mirceaStyles.css}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+
+<h3 th:text="#{transport.header.label}"></h3>
+
+    <form class="form2" action="/saveTransport" method="post" th:object="${transport}">
+        <input th:field="*{orderNo}" type="text" placeholder="Enter order no." name="orderNo"> &nbsp;
+        <input th:field="*{orderDate}" type="date" placeholder="Enter order date" name="orderDate">&nbsp;
+        <input th:field="*{loadingPlace}" type="text" placeholder="Enter loading place" name="loadingPlace">&nbsp;
+        <input th:field="*{loadingArea}" type="text" placeholder="Enter loading area" name="loadingArea">&nbsp;
+        <input th:field="*{loadingCountry}" type="text" placeholder="Enter loading country" name="loadingCountry"><br>
+        <input th:field="*{loadingDate}" type="datetime-local" placeholder="Enter loading date" name="loadingDate">&nbsp;
+        <input th:field="*{unloadingPlace}" type="text" placeholder="Enter unloading place" name="unloadingPlace">&nbsp;
+        <input th:field="*{unloadingArea}" type="text" placeholder="Enter unloading area" name="unloadingArea">&nbsp;
+        <input th:field="*{unloadingCountry}" type="text" placeholder="Enter unloading country" name="unloadingCountry">&nbsp;
+        <input th:field="*{unloadingDate}" type="datetime-local" placeholder="Enter unloading date" name="unloadingDate"><br>
+        <input th:field="*{price}" type="number" placeholder="Enter price" name="price">&nbsp;
+        <input th:field="*{currency}" type="text" placeholder="Enter currency" name="currency">&nbsp;
+        <input th:field="*{paymentTerm}" type="number" placeholder="Enter payment term" name="paymentTerm">&nbsp;
+        <input th:field="*{autoNumber}" type="text" placeholder="Enter auto no." name="autoNumber">&nbsp;
+        <input th:field="*{driverName}" type="text" placeholder="Enter driver name" name="driverName"><br>
+        <input th:field="*{company}" type="text" placeholder="Enter client name" name="company">&nbsp;
+        <input th:field="*{clientContact}" type="text" placeholder="Enter client contact" name="clientContact">&nbsp;
+        <input th:field="*{clientContactPhone}" type="text" placeholder="Enter contact phone" name="clientContactPhone">&nbsp;
+        <button type="submit" th:text="#{transport.header.label}"></button>&nbsp;<button type="reset">Reset</button>&nbsp;&nbsp;
+        <a href="/transports">Cancel</a><br><br>
+    </form>
+
+</body>
+</html>

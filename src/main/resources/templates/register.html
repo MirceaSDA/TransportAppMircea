@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+</head>
+<body>
+
+<!--<div style="padding-left: 20px; padding-top: 50px">-->
+<!--    <form action="/saveUser" method="post" th:object="${user}">-->
+<!--        <input type="hidden" id="userId" th:field="*{userId}">-->
+<!--        <input th:field="*{username}" type="text" placeholder="Enter username" name="username">-->
+<!--        <input th:field="*{name}" type="text" placeholder="Enter name" name="name">-->
+<!--        <input th:field="*{surname}" type="text" placeholder="Enter surname" name="surname"><br>-->
+<!--        <input th:field="*{password}" type="password" placeholder="Enter password" name="password">-->
+<!--        <input th:field="*{password}" type="password" placeholder="Enter password" name="password"><br>-->
+<!--        <button type="submit" th:text="#{user.header.label}"></button>&nbsp;<button type="reset">Reset</button>&nbsp;-->
+<!--        <a href="/transports">Cancel</a><br><br>-->
+<!--    </form><br><br>-->
+<!--</div>-->
+
+<div style="padding-left: 20px; padding-top: 50px">
+    <form action="/register-user" method="post" th:object="${registerModel}">
+        <input type="hidden" id="userId" th:field="*{userId}">
+        <input th:field="*{username}" type="text" placeholder="Enter username" name="username">
+        <input th:field="*{name}" type="text" placeholder="Enter name" name="name">
+        <input th:field="*{surname}" type="text" placeholder="Enter surname" name="surname"><br>
+        <input th:field="*{password}" type="password" placeholder="Enter password" name="password"><br>
+        <button type="submit" th:text="#{user.header.label}"></button>&nbsp;<button type="reset">Reset</button>&nbsp;
+        <a href="/transports">Cancel</a><br><br>
+    </form><br><br>
+</div>
+
+</body>
+</html>

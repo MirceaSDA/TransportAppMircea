@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Users</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/mirceaStyles.css}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        table, th, td {
+            border-collapse: collapse;
+            border: 1px solid black;
+            width: 100%;
+        }
+
+        th {
+            background-color: royalblue;
+            text-align: center;
+            vertical-align: center;
+            height: 30px;
+        }
+
+        /*.tablepress{*/
+        /*    table-layout: auto;*/
+        /*}*/
+        th, td, tr {
+            padding: 10px;
+            /*width: fit-content;*/
+            white-space: nowrap;
+        }
+
+        tr:hover {
+            background-color: hotpink;
+        }
+
+        tr:nth-child(even) {
+            background-color: darkkhaki;
+        }
+        .topnav {
+            overflow: hidden;
+            background-color: chocolate;
+        }
+        .topnav a {
+            float: right;
+            display: block;
+            color: wheat;
+            text-align: center;
+            padding: 14px 16px;
+            font-size: 17px;
+        }
+        .topnav a:hover {
+            background-color: crimson;
+            color: black;
+        }
+        .topnav a.active {
+            background-color: crimson;
+        }
+    </style>
+</head>
+<body>
+
+<div class="topnav" id="myTopnav"><!--sec:authorize="hasAuthority('ROLE_USER')"-->
+    <a href="/addUser" sec:authorize="hasAuthority('ROLE_ADMIN')">Users</a>
+    <a href="/companies">Companies</a>
+    <a href="/transports">Transports</a>
+    <a href="/frontpage" class="active">Home</a>
+</div>
+
+<div style="padding-left: 20px">
+    <h2 th:text="#{user.header.label}"></h2>
+    <button onclick="document.location='register'">Add new user</button> &nbsp;
+    <button onclick="document.location='user'">Get all users</button>
+</div>
+<br><br><hr>
+
+<div style="overflow-x:auto;">
+    <table class="tablepress">
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Surname</th>
+            <th>Username</th>
+            <th>Password</th>
+            <th>Status</th>
+        </tr>
+        <tr th:each="user:${users}">
+            <td th:text="${user.userId}"></td>
+            <td th:text="${user.name}"></td>
+            <td th:text="${user.surname}"></td>
+            <td th:text="${user.password}"></td>
+            <td th:text="${user.userStatusId}"></td>
+        </tr>
+    </table>
+</div>
+
+</body>
+</html>

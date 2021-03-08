@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Add company</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/mirceaStyles.css}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<form action="/saveCompany" method="post" th:object="${company}">
+<!--    <input type="hidden" id="cui" th:field="*{cui}">-->
+    <input th:field="*{cui}" type="text" placeholder="Enter CUI" name="cui">
+    <input th:field="*{companyVAT}" type="text" placeholder="Enter company VAT" name="companyVAT">
+    <input th:field="*{companyName}" type="text" placeholder="Enter company name" name="companyName">
+    <input th:field="*{companyCommerceRegistryNumber}" type="text" placeholder="Enter Commerce Registry no."
+           name="companyCommerceRegistryNumber">
+    <input th:field="*{companyAddress}" type="text" placeholder="Enter company address" name="companyAddress">
+    <input th:field="*{companyTown}" type="text" placeholder="Enter company town" name="companyTown">
+    <input th:field="*{companyCountry}" type="text" placeholder="Enter company country" name="companyCountry">
+    <input th:field="*{companyBankAccount}" type="text" placeholder="Enter bank account" name="companyBankAccount">
+    <input th:field="*{companyBank}" type="text" placeholder="Enter company bank" name="companyBank">
+    <input th:field="*{invoiceDomesticSerial}" type="text" placeholder="Enter invoice domestic serial no."
+           name="invoiceDomesticSerial">
+    <input th:field="*{invoiceExternalSerial}" type="text" placeholder="Enter invoice external serial no."
+           name="invoiceExternalSerial">
+    <input th:field="*{companyType}" type="text" placeholder="Enter company type" name="companyType"
+           sec:authorize="hasAuthority('ROLE_USER')">
+    <input th:field="*{companyStatus}" type="text" placeholder="Enter company status" name="companyStatus"
+           sec:authorize="hasAuthority('ROLE_USER')">
+
+    <button type="submit" th:text="#{company.header.label}"></button>&nbsp;<button type="reset">Reset</button>&nbsp;
+    <a href="/companies">Cancel</a><br><br>
+    <hr>
+    <br><br>
+</form>
+</body>
+</html>

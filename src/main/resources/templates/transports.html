@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Transports</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/mirceaStyles.css}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        table, th, td {
+            border-collapse: collapse;
+            border: 1px solid black;
+            width: 100%;
+        }
+
+        th {
+            background-color: royalblue;
+            text-align: center;
+            vertical-align: center;
+            height: 30px;
+        }
+
+        /*.tablepress{*/
+        /*    table-layout: auto;*/
+        /*}*/
+        th, td, tr {
+            padding: 10px;
+            /*width: fit-content;*/
+            white-space: nowrap;
+        }
+
+        tr:hover {
+            background-color: hotpink;
+        }
+
+        tr:nth-child(even) {
+            background-color: darkkhaki;
+        }
+        .topnav {
+            overflow: hidden;
+            background-color: chocolate;
+        }
+        .topnav a {
+            float: right;
+            display: block;
+            color: wheat;
+            text-align: center;
+            padding: 14px 16px;
+            font-size: 17px;
+        }
+        .topnav a:hover {
+            background-color: crimson;
+            color: black;
+        }
+        .topnav a.active {
+            background-color: crimson;
+        }
+    </style>
+</head>
+<body>
+<!--    <h1 th:text="#{index.header.label}">Transports list</h1>-->
+<div class="topnav" id="myTopnav"><!--sec:authorize="hasAuthority('ROLE_USER')"-->
+    <a href="/users" sec:authorize="hasAuthority('ROLE_ADMIN')">Users</a>
+    <a href="/companies">Companies</a>
+    <a href="/transports">Transports</a>
+    <a href="/frontpage" class="active">Home</a>
+</div>
+<div style="padding-left: 20px">
+    <h2>Transports list</h2>
+    <button onclick="document.location='addTransport'">Add new transport</button> &nbsp;
+    <button onclick="document.location='transports'">Get all transports</button>&nbsp;
+    <form action="/transportById/{loadingArea}" method="get" class="form2">
+        <input type="text" name="loadingArea" placeholder="Filter by loading area">
+        <input type="submit">
+    </form>
+</div>
+<br><br>
+<div style="overflow-x:auto;">
+    <table class="tablepress">
+        <tr>
+            <th>Id</th>
+            <th>Order number</th>
+            <th>Order date</th>
+            <th>Loading place</th>
+            <th>Loading areas</th>
+            <th>Loading country</th>
+            <th>Loading date</th>
+            <th>Unloading place</th>
+            <th>Unloading areas</th>
+            <th>Unloading country</th>
+            <th>Unloading date</th>
+            <th>Price</th>
+            <th>Currency</th>
+            <th>Payment term</th>
+            <th>Auto number</th>
+            <th>Driver name</th>
+            <th>Client name</th>
+            <th>Client contact</th>
+            <th>Contact phone</th>
+            <th>Transport status</th>
+            <th>Action</th>
+        </tr>
+        <tr th:each="transport:${transports}">
+            <td th:text="${transport.transportId}"></td>
+            <td th:text="${transport.orderNo}"></td>
+            <td th:text="${#dates.format(transport.orderDate, 'dd-MM-yyy')}"></td>
+            <td th:text="${transport.loadingPlace}"></td>
+            <td th:text="${transport.loadingArea}"></td>
+            <td th:text="${transport.loadingCountry}"></td>
+            <td th:text="${#dates.format(transport.loadingDate, 'dd-MM-yyy HH:mm')}"></td>
+            <td th:text="${transport.unloadingPlace}"></td>
+            <td th:text="${transport.unloadingArea}"></td>
+            <td th:text="${transport.unloadingCountry}"></td>
+            <td th:text="${#dates.format(transport.unloadingDate, 'dd-MM-yyy HH:mm')}"></td>
+            <td th:text="${transport.price}"></td>
+            <td th:text="${transport.currency}"></td>
+            <td th:text="${transport.paymentTerm}"></td>
+            <td th:text="${transport.autoNumber}"></td>
+            <td th:text="${transport.driverName}"></td>
+            <td th:text="${transport.company}"></td>
+            <td th:text="${transport.clientContact}"></td>
+            <td th:text="${transport.clientContactPhone}"></td>
+            <td th:text="${transport.transportStatus}"></td>
+            <td>
+                <button>
+                    <a th:href="@{'/addInvoice/' + ${transport.transportId}}">Add invoice</a>
+                </button>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

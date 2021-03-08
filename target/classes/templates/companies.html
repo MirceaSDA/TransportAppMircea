@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Companies</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/mirceaStyles.css}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        .topnav {
+            overflow: hidden;
+            background-color: chocolate;
+        }
+
+        .topnav a {
+            float: right;
+            display: block;
+            color: wheat;
+            text-align: center;
+            padding: 14px 16px;
+            font-size: 17px;
+        }
+
+        .topnav a:hover {
+            background-color: crimson;
+            color: black;
+        }
+
+        .topnav a.active {
+            background-color: crimson;
+        }
+    </style>
+</head>
+<body>
+<div class="topnav" id="myTopnav"><!--sec:authorize="hasAuthority('ROLE_USER')"-->
+<a href="/users" sec:authorize="hasAuthority('ROLE_ADMIN')">Users</a>
+<a href="/companies">Companies</a>
+<a href="/transports">Transports</a>
+<a href="/frontpage" class="active">Home</a>
+</div>
+<div style="padding-left: 20px">
+    <h2>Companies list</h2>
+    <button onclick="document.location='addCompany'">Add new company</button> &nbsp;
+    <button onclick="document.location='companies'">Get all companies</button>
+    <br><br>
+</div>
+<div>
+    <table>
+        <tr>
+            <th>CUI</th>
+            <th>VAT</th>
+            <th>Name</th>
+            <th>Commerce Reg.No.</th>
+            <th>Address</th>
+            <th>Town</th>
+            <th>Country</th>
+            <th>Bank account</th>
+            <th>Bank name</th>
+            <th>Domestic serial no.</th>
+            <th>External serial no.</th>
+            <th sec:authorize="hasAuthority('ROLE_ADMIN')">Type</th>
+            <th sec:authorize="hasAuthority('ROLE_ADMIN')">Status</th>
+            <th sec:authorize="hasAuthority('ROLE_ADMIN')">Action</th>
+        </tr>
+        <tr th:each="company:${companies}">
+            <td th:text="${company.cui}"></td>
+            <td th:text="${company.companyVAT}"></td>
+            <td th:text="${company.companyName}"></td>
+            <td th:text="${company.companyCommerceRegistryNumber}"></td>
+            <td th:text="${company.companyAddress}"></td>
+            <td th:text="${company.companyTown}"></td>
+            <td th:text="${company.companyCountry}"></td>
+            <td th:text="${company.companyBankAccount}"></td>
+            <td th:text="${company.companyBank}"></td>
+            <td th:text="${company.invoiceDomesticSerial}"></td>
+            <td th:text="${company.invoiceExternalSerial}"></td>
+            <td th:text="${company.companyType}" sec:authorize="hasAuthority('ROLE_ADMIN')"></td>
+            <td th:text="${company.companyStatus}" sec:authorize="hasAuthority('ROLE_ADMIN')"></td>
+            <td sec:authorize="hasAuthority('ROLE_ADMIN')">
+                <a th:href="@{'/editCompany/' + ${company.cui}}">Edit</a>
+                <a th:href="@{'/deleteCompany/' + ${company.cui}}">Delete</a>
+            </td>
+        </tr>
+    </table>
+    </form>
+</div>
+</body>
+</html>
